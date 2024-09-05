@@ -1,0 +1,5 @@
+/target
+/resources/local/
+/.idea/
+/venv/
+__pycache__/
