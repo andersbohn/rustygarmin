@@ -2,17 +2,93 @@ use serde::{de::Visitor, Deserialize, Deserializer,Serialize};
 
 
 #[derive(Serialize,Deserialize)]
+pub struct ActivityType {
+    typeId: u16,
+    typeKey: String,
+    isHidden: bool,
+    restricted:  bool,
+    trimmable:  bool
+
+}
+
+#[derive(Serialize,Deserialize)]
+pub struct EventType {
+    eventType: String,
+    typeId: u16,
+    typeKey: String,
+    sortOrder: u16
+
+}
+
+#[derive(Serialize,Deserialize)]
 #[serde(untagged)]
 pub enum Activity {
     #[serde(rename = "running")]
     Running {
-        #[serde(rename = "activityId")]
-        id: u64,
-        #[serde(rename = "activityName")]
-        name: String,
+        activityId: u64,
+        activityName: String,
+        startTimeLocal: String,
+        startTimeGMT: String,
+        activityType: ActivityType,
+        eventType: EventType,
         distance: f64,
         duration: f64,
-
+        elapsedDuration: f64,
+        movingDuration: f64,
+        elevationGain: f64,
+        elevationLoss: f64,
+        averageSpeed: f64,
+        maxSpeed: f64,
+        startLatitude: f64,
+        startLongitude: f64,
+        hasPolyline: bool,
+        hasImages: bool,
+        ownerId: i64,
+        ownerDisplayName: String,
+        ownerFullName: String,
+        ownerProfileImageUrlSmall: String,
+        ownerProfileImageUrlMedium: String,
+        ownerProfileImageUrlLarge: String,
+        calories: f64,
+        bmrCalories: f64,
+        averageHR: f64,
+        maxHR: f64,
+        userPro: bool,
+        hasVideo: bool,
+        timeZoneId: i32,
+        beginTimestamp: i64,
+        sportTypeId: i32,
+        aerobicTrainingEffect: f64,
+        anaerobicTrainingEffect: f64,
+        deviceId: i64,
+        minTemperature: f64,
+        maxTemperature: f64,
+        minElevation: f64,
+        maxElevation: f64,
+        maxVerticalSpeed: f64,
+        manufacturer: Option<String>,
+        locationName: Option<String>,
+        lapCount: i32,
+        endLatitude: f64,
+        endLongitude: f64,
+        waterEstimated: f64,
+        trainingEffectLabel: Option<String>,
+        activityTrainingLoad: f64,
+        minActivityLapDuration: f64,
+        aerobicTrainingEffectMessage: Option<String>,
+        anaerobicTrainingEffectMessage: Option<String>,
+        hasSplits: Option<bool>,
+        moderateIntensityMinutes: i32,
+        vigorousIntensityMinutes: i32,
+        pr: bool,
+        autoCalcCalories: bool,
+        elevationCorrected: Option<bool>,
+        atpActivity: Option<bool>,
+        favorite: bool,
+        decoDive: Option<bool>,
+        parent: bool,
+        purposeful: bool,
+        manualActivity: bool
     },
     #[serde(rename = "hiking")]
     Hiking {
