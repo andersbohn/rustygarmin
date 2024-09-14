@@ -2,76 +2,29 @@ use serde::{de::Visitor, Deserialize, Deserializer,Serialize};
 
 
 
-#[derive(Serialize)]
+#[derive(Serialize,Deserialize)]
+// #[serde(tag = "activityType.typeKey")]
+#[serde(tag = "atype")]
 pub enum Activity {
+    #[serde(rename = "running")]
+    Running {
+        #[serde(rename = "activityId")]
+        id: u64,
+        #[serde(rename = "activityName")]
+        name: String,
+        distance: f64,
+        duration: f64,
+
+    },
     #[serde(rename = "hiking")]
     Hiking {
         #[serde(rename = "activityId")]
         id: u64,
         #[serde(rename = "activityName")]
         name: String,
-        // startTimeLocal: String,
-        // startTimeGMT: String,
-        // activityType: ActivityType,
-        // eventType: EventType,
         distance: f64,
         duration: f64,
-        // elapsedDuration: Option<f64>,
-        // movingDuration: Option<f64>,
-        // elevationGain: Option<f64>,
-        // elevationLoss: Option<f64>,
-        // averageSpeed: Option<f64>,
-        // maxSpeed: Option<f64>,
-        // startLatitude: Option<f64>,
-        // startLongitude: Option<f64>,
-        // hasPolyline: bool,
-        // hasImages: bool,
-        // ownerId: i64,
-        // ownerDisplayName: String,
-        // ownerFullName: String,
-        // ownerProfileImageUrlSmall: String,
-        // ownerProfileImageUrlMedium: String,
-        // ownerProfileImageUrlLarge: String,
-        // calories: f64,
-        // bmrCalories: Option<f64>,
-        // averageHR: Option<f64>,
-        // maxHR: Option<f64>,
-        // userPro: bool,
-        // hasVideo: bool,
-        // timeZoneId: i32,
-        // beginTimestamp: Option<i64>,
-        // sportTypeId: Option<i32>,
-        // aerobicTrainingEffect: Option<f64>,
-        // anaerobicTrainingEffect: Option<f64>,
-        // deviceId: Option<i64>,
-        // minTemperature: Option<f64>,
-        // maxTemperature: Option<f64>,
-        // minElevation: Option<f64>,
-        // maxElevation: Option<f64>,
-        // maxVerticalSpeed: Option<f64>,
-        // manufacturer: Option<String>,
-        // locationName: Option<String>,
-        // lapCount: Option<i32>,
-        // endLatitude: Option<f64>,
-        // endLongitude: Option<f64>,
-        // waterEstimated: Option<f64>,
-        // trainingEffectLabel: Option<String>,
-        // activityTrainingLoad: Option<f64>,
-        // minActivityLapDuration: Option<f64>,
-        // aerobicTrainingEffectMessage: Option<String>,
-        // anaerobicTrainingEffectMessage: Option<String>,
-        // hasSplits: Option<bool>,
-        // moderateIntensityMinutes: Option<i32>,
-        // vigorousIntensityMinutes: Option<i32>,
-        // pr: bool,
-        // autoCalcCalories: bool,
-        // elevationCorrected: Option<bool>,
-        // atpActivity: Option<bool>,
-        // favorite: bool,
-        // decoDive: Option<bool>,
-        // parent: bool,
-        // purposeful: bool,
-        // manualActivity: bool
+
     },
     #[serde(rename = "cycling")]
     Cycling {
@@ -79,18 +32,72 @@ pub enum Activity {
         id: u64,
         #[serde(rename = "activityName")]
         name: String,
-        // startTimeLocal: String,
-        // startTimeGMT: String,
-        // activityType: ActivityType,
-        // eventType: EventType,
         distance: f64,
         duration: f64,
 
     },
+    #[serde(rename = "bouldering")]
+    Bouldering {
+        #[serde(rename = "activityId")]
+        id: u64,
+        #[serde(rename = "activityName")]
+        name: String,
+        duration: f64,
+    },#[serde(rename = "strength_training")]
+    Strength {
+        #[serde(rename = "activityId")]
+        id: u64,
+        #[serde(rename = "activityName")]
+        name: String,
+        duration: f64,
+    },
+    #[serde(rename = "backcountry_skiing")]
+    BackcountrySkiing {
+        #[serde(rename = "activityId")]
+        id: u64,
+        #[serde(rename = "activityName")]
+        name: String,
+        duration: f64,
+    },
+    #[serde(rename = "backcountry_skiing_snowboarding_ws")]
+    BackcountrySkiingSnowboardingWs {
+        #[serde(rename = "activityId")]
+        id: u64,
+        #[serde(rename = "activityName")]
+        name: String,
+        duration: f64,
+    },
+    #[serde(rename = "cross_country_skiing_ws")]
+    CrossCountrySkiingWs {
+        #[serde(rename = "activityId")]
+        id: u64,
+        #[serde(rename = "activityName")]
+        name: String,
+        duration: f64,
+    },
+    // indoor_cardio
+    // indoor_climbing
+    // indoor_cycling
+    // indoor_rowing
+    // indoor_running
+    // lap_swimming
+    // mountaineering
+    // multi_sport
+    // obstacle_run
+    // open_water_swimming
+    // other
+    // resort_skiing_snowboarding_ws
+    // rowing_v2
+    // running
+    // stair_climbing
+    // stand_up_paddleboarding_v2
+    // strength_training
+    // trail_running
+    // treadmill_running
     Others,
 }
 
-struct ActivityVisitor;
+/*struct ActivityVisitor;
 
 impl<'de> Visitor<'de> for ActivityVisitor {
     type Value = Activity;
@@ -132,4 +139,4 @@ impl<'de> Deserialize<'de> for Activity {
     {
         deserializer.deserialize_any(ActivityVisitor)
     }
-}
+}*/
